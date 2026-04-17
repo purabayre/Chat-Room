@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - ChatApp</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/header', { user: null }) %>
+
+  <main style="display:flex; justify-content:center; align-items:center; height:80vh;">
+    <form action="/auth/register" method="POST" enctype="multipart/form-data" style="display:flex; flex-direction:column; gap:10px; width:300px; padding:20px; border:1px solid #ccc; border-radius:8px;">
+      <h2>Register</h2>
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="file" name="avatar" accept="image/*">
+      <button type="submit" style="padding:10px; background:#43b581; color:white; border:none; border-radius:5px; cursor:pointer;">Register</button>
+    </form>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

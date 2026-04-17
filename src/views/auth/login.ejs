@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - ChatApp</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/header', { user: null }) %>
+
+  <main style="display:flex; justify-content:center; align-items:center; height:80vh;">
+    <form action="/auth/login" method="POST" style="display:flex; flex-direction:column; gap:10px; width:300px; padding:20px; border:1px solid #ccc; border-radius:8px;">
+      <h2>Login</h2>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit" style="padding:10px; background:#7289da; color:white; border:none; border-radius:5px; cursor:pointer;">Login</button>
+    </form>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

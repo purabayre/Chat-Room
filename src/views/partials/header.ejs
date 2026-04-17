@@ -1,0 +1,22 @@
+<header style="display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:#2f3136; color:white;">
+  <h1 style="margin:0; font-size:1.5rem;">ChatApp</h1>
+
+  <div>
+    <% if (user) { %>
+      <span style="margin-right:10px;">Hello, <%= user.name %></span>
+
+      
+      <a href="/auth/profile" 
+         style="margin-right:10px; padding:5px 10px; background:#7289da; color:white; text-decoration:none; border-radius:5px;">
+        Edit Profile
+      </a>
+
+      <form action="/auth/logout" method="POST" style="display:inline;">
+        <button type="submit" style="padding:5px 10px; cursor:pointer; border-radius:5px;">Logout</button>
+      </form>
+    <% } else { %>
+      <a href="/auth/login" style="margin-right:10px; padding:5px 10px; background:#7289da; color:white; text-decoration:none; border-radius:5px;">Login</a>
+      <a href="/auth/register" style="padding:5px 10px; background:#43b581; color:white; text-decoration:none; border-radius:5px;">Register</a>
+    <% } %>
+  </div>
+</header>

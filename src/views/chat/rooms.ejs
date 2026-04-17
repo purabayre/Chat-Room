@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Rooms - ChatApp</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/header', { user: user }) %>
+
+  <main style="padding:20px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+      <h1>Chat Rooms</h1>
+
+      <% if (user) { %>
+        
+        <form action="/chat/rooms" method="POST" style="display:flex; gap:10px;">
+          <input type="text" name="name" placeholder="Room Name" required style="padding:5px; border-radius:5px; border:1px solid #ccc;">
+          <button type="submit" style="padding:5px 10px; background:#43b581; color:white; border:none; border-radius:5px; cursor:pointer;">Create Room</button>
+        </form>
+      <% } %>
+    </div>
+
+    <div id="rooms-list" style="display:flex; flex-direction:column; gap:10px;">
+      <% if (rooms.length === 0) { %>
+        <p>No rooms available. Create one!</p>
+      <% } %>
+
+      <% rooms.forEach(room => { %>
+        <a href="/chat/rooms/<%= room._id %>" 
+           style="padding:10px; border:1px solid #ccc; border-radius:5px; text-decoration:none; color:black; display:flex; justify-content:space-between; align-items:center;">
+          <span><%= room.name %></span>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <small style="color:#666;">Created by: <%= room.createdBy ? room.createdBy.name : 'Unknown' %></small>
+            <span class="online-count" data-room="<%= room._id %>" style="color:#43b581;">0 online</span>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+   
+    socket.emit("get-room-counts");
+
+  
+    socket.on("rooms-online", (counts) => {
+      document.querySelectorAll(".online-count").forEach(span => {
+        const roomId = span.dataset.room;
+        const count = counts[roomId] || 0;
+        span.innerText = count + " online";
+      });
+    });
+  </script>
+
+</body>
+</html>
