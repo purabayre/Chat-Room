@@ -80,7 +80,7 @@ exports.loginUser = (req, res, next) => {
 exports.logoutUser = (req, res, next) => {
   req.session.destroy((err) => {
     if (err) console.error('Logout Error:', err.message);
-    res.redirect('/');
+    res.redirect('login');
   });
 };
 
@@ -123,7 +123,7 @@ exports.updateProfile = (req, res, next) => {
       req.session.user.name = updatedUser.name;
       req.session.user.avatar = updatedUser.avatarPath;
 
-      res.redirect('/auth/profile');
+      res.redirect('/chat');
     })
     .catch((err) => {
       console.error('Profile Update Error:', err.message);
